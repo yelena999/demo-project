@@ -21,7 +21,6 @@ public class StepDefs {
         Driver.getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().get("http://etsy.com");
-
     }
 
     @When("^I search for \"([^\"]*)\"$")
