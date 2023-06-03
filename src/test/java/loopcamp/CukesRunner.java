@@ -13,6 +13,6 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt",},
         features = "src/test/resources/features",
         publish = true,
-        tags = "@regression"
+        tags = "@regression or @smoke"
 )
 public class CukesRunner {}
