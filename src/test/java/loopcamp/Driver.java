@@ -22,6 +22,10 @@ public class Driver {
     }
 
     private static WebDriver driver;
+    private static ChromeOptions chromeOptions;
+    private static FirefoxOptions firefoxOptions;
+
+    private static DesiredCapabilities desiredCapabilities;
 
     public static WebDriver getDriver() {
         if (driver == null) {
@@ -37,7 +41,7 @@ public class Driver {
                         // assign your grid server address
                         String gridAddress = "3.92.199.191";
                         URL url = new URL("http://" + gridAddress + ":4444/wd/hub");
-                        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+                        desiredCapabilities = new DesiredCapabilities();
                         desiredCapabilities.setBrowserName("chrome");
                         driver = new RemoteWebDriver(url, desiredCapabilities);
                     } catch (Exception e) {
@@ -95,6 +99,63 @@ public class Driver {
                     }
                     WebDriverManager.getInstance(SafariDriver.class).setup();
                     driver = new SafariDriver();
+                    break;
+
+
+                /**
+                 * These added because of EC@2 Jenkins on Linux was not running the ones above because of graphical issues.
+                 */
+                case "chrome-jenkins":
+                    WebDriverManager.chromedriver().setup();
+                    chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    driver = new ChromeDriver(chromeOptions);
+                    break;
+
+                case "remote-chrome-jenkins":
+                    try {
+                        // assign your grid server address
+                        String gridAddress = "3.92.199.191";
+                        URL url = new URL("http://" + gridAddress + ":4444/wd/hub");
+                        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+                        chromeOptions = new ChromeOptions();
+                        chromeOptions.addArguments("--headless");
+                        chromeOptions.addArguments("--no-sandbox");
+                        chromeOptions.addArguments("--disable-dev-shm-usage");
+                        desiredCapabilities.merge(chromeOptions);
+                        driver = new RemoteWebDriver(url, desiredCapabilities);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case "firefox-jenkins":
+                    WebDriverManager.firefoxdriver().setup();
+                    firefoxOptions = new FirefoxOptions();
+                    firefoxOptions.addArguments("--headless");
+                    firefoxOptions.addArguments("--disable-gpu");
+                    firefoxOptions.addArguments("--no-sandbox");
+                    driver = new FirefoxDriver(firefoxOptions);
+                    break;
+
+                case "remote-firefox-jenkins":
+                    try {
+                        // assign your grid server address
+                        String gridAddress = "3.92.199.191";
+                        URL url = new URL("http://" + gridAddress + ":4444/wd/hub");
+                        desiredCapabilities = new DesiredCapabilities();
+                        desiredCapabilities.setBrowserName("firefox");
+                        FirefoxOptions firefoxOptions = new FirefoxOptions();
+                        firefoxOptions.addArguments("--headless");
+                        firefoxOptions.addArguments("--disable-gpu");
+                        firefoxOptions.addArguments("--no-sandbox");
+                        desiredCapabilities.merge(firefoxOptions);
+                        driver = new RemoteWebDriver(url, desiredCapabilities);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
         }
