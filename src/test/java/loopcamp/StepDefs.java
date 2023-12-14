@@ -26,8 +26,8 @@ public class StepDefs {
 
     @When("^I search for \"([^\"]*)\"$")
     public void i_search_for(String search) throws Throwable {
-//        Driver.getDriver().findElement(By.cssSelector("input[aria-label^='Search']")).sendKeys(search + Keys.ENTER);
-        Driver.getDriver().findElement(By.xpath("//*[@id='twotabsearchtextbox']")).sendKeys(search + Keys.ENTER);
+        Driver.getDriver().findElement(By.cssSelector("input[aria-label^='Search']")).sendKeys(search + Keys.ENTER);
+//        Driver.getDriver().findElement(By.xpath("//*[@id='twotabsearchtextbox']")).sendKeys(search + Keys.ENTER);
 
     }
 
