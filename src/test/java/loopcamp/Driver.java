@@ -105,7 +105,7 @@ public class Driver {
                 /**
                  * These added because of EC@2 Jenkins on Linux was not running the ones above because of graphical issues.
                  */
-                case "chrome-jenkins":
+                case "chrome-linux":
                     WebDriverManager.chromedriver().setup();
                     chromeOptions = new ChromeOptions();
                     chromeOptions.addArguments("--headless");
@@ -114,7 +114,7 @@ public class Driver {
                     driver = new ChromeDriver(chromeOptions);
                     break;
 
-                case "remote-chrome-jenkins":
+                case "remote-chrome-linux":
                     try {
                         // assign your grid server address
                         String gridAddress = "3.92.199.191";
@@ -131,7 +131,7 @@ public class Driver {
                     }
                     break;
 
-                case "firefox-jenkins":
+                case "firefox-linux":
                     WebDriverManager.firefoxdriver().setup();
                     firefoxOptions = new FirefoxOptions();
                     firefoxOptions.addArguments("--headless");
@@ -140,7 +140,7 @@ public class Driver {
                     driver = new FirefoxDriver(firefoxOptions);
                     break;
 
-                case "remote-firefox-jenkins":
+                case "remote-firefox-linux":
                     try {
                         // assign your grid server address
                         String gridAddress = "3.92.199.191";
