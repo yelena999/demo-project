@@ -48,6 +48,7 @@ public class Driver {
                         e.printStackTrace();
                     }
                     break;
+
                 case "remote-firefox":
                     try {
                         // assign your grid server address
@@ -60,21 +61,35 @@ public class Driver {
                         e.printStackTrace();
                     }
                     break;
+
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
                     break;
+
                 case "chrome-headless":
+//                    WebDriverManager.chromedriver().setup();
+//                    driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless"); // Enable headless mode
+                    //options.addArguments("start-maximized"); // maximize
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+                    driver = new ChromeDriver(options);
                     break;
+
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
                     break;
+
                 case "firefox-headless":
+//                    WebDriverManager.firefoxdriver().setup();
+//                    driver = new FirefoxDriver(new FirefoxOptions().setHeadless(true));
+                    FirefoxOptions options2 = new FirefoxOptions();
+                    options2.addArguments("--headless"); // Enable headless mode
+                    //options.addArguments("start-maximized"); // maximize
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver(new FirefoxOptions().setHeadless(true));
+                    driver = new FirefoxDriver(options2);
                     break;
 
                 case "ie":

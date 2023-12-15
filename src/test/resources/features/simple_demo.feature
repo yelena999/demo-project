@@ -3,7 +3,7 @@ Feature: The application should be running
   @smoke @test1
   Scenario: simple search
     Given I am on the home page
-    When I search for "wooden loop"
+    When I search for "glass teapot"
     Then I should see the results
 
 
